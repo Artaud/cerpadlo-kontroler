@@ -12,7 +12,6 @@ int PIN_VRT_SPODNI = A1;
 int PIN_JIMKA_HORNI = A2;
 int PIN_JIMKA_SPODNI = A3;
 
-
 int PIN_RELE = 10;
 
 bool cerpadloBezi = false;
@@ -28,21 +27,21 @@ void setup() {
   pinMode(PIN_JIMKA_SPODNI, INPUT_PULLUP);
   
   pinMode(PIN_RELE, OUTPUT);
-  
-  stopCerpadlo();
+  digitalWrite(PIN_RELE, HIGH);    
 }
 
 // the loop function runs over and over again forever
 void loop() {
+//  Serial.println(cerpadloBezi);
+//  printAnalogStates();
+
+  delay(500);
+
   if (dry(PIN_VRT_SPODNI) || submerged(PIN_JIMKA_HORNI)) {
     stopCerpadlo();
   } else if (dry(PIN_JIMKA_SPODNI) && submerged(PIN_VRT_HORNI)) {
     startCerpadlo();
   }
-//  Serial.println(cerpadloBezi);
-//  printAnalogStates();
-
-  delay(500);
 }
 
 void startCerpadlo() {
